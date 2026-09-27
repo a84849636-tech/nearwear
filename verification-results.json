@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "START mark only, no nav, automatic transition after 10 seconds",
+    "12 LIKE/SKIP decisions complete; puzzle uses six distinct liked photos",
+    "Puzzle piece expands and outside tap resets",
+    "Taste result → MAP with all four stores and matching emphasis",
+    "Taste/SAVED/ALL emphasis modes never hide stores",
+    "Search, style, OPEN NOW, distance filters",
+    "Store Save and three-photo carousel keeps info fixed",
+    "Shop stories with timestamp and FEED/ITEMS/INFO tabs",
+    "Feed → linked product; Add to Taste and independent Item Save",
+    "Reservation rejects past date and accepts valid date/time",
+    "VIEW MAP selected store; Cancel restores AVAILABLE; re-reservation",
+    "SHOPS / ITEMS / TASTE independent and persist after reload",
+    "Bottom nav, MY preferences persistence, saved puzzle replay",
+    "EXPLORE sections and browser Back scroll restoration",
+    "360px layouts, no horizontal overflow, feed columns and preview fit",
+    "390px layouts, no horizontal overflow, feed columns and preview fit",
+    "1440px layouts, no horizontal overflow, feed columns and preview fit",
+    "No browser JavaScript exceptions"
+  ],
+  "errors": []
+}

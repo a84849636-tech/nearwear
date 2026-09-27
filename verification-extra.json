@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Taste photograph fills image area without empty space",
+    "Actual mobile vertical touch swipe snaps next image to center",
+    "Actual touch swipe advances preview carousel",
+    "LIKE adds metadata weights, SKIP no penalty, Add to Taste updates profile, puzzle fills from metadata",
+    "SOLD cannot be reserved",
+    "REFINE MY TASTE resets browsing session",
+    "360/390/Desktop: no broken images or developer-facing copy in screens"
+  ]
+}
