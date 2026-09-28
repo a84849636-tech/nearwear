@@ -162,8 +162,8 @@
 .notification-label input:checked{background:#c6d3b0}
 .notification-label input:checked:after{left:21px;background:#28331d}
 .directions-page>.outline{margin-top:12px}
-@media(min-width:1100px){.feed-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero-gallery .carousel{aspect-ratio:3.4}.product-detail{grid-template-columns:1.05fr 1fr}}
-@media(max-width:760px){
+
+@media(min-width:0px){
  .bottom-nav>a{min-width:60px;font-size:9px}.bottom-nav svg{width:19px;height:19px}
  .taste-discovery{--card-h:64dvh}.taste-scroll{padding-inline:22px;width:100%}.taste-header{height:55px}.taste-header h1{font-size:11px;letter-spacing:1.6px}
  .preference-switch{height:44px;gap:11px}.preference-switch button{font-size:9px;letter-spacing:.5px}
@@ -191,7 +191,7 @@
  .collection-page{padding:27px 20px}.saved-grid{grid-template-columns:1fr 1fr;gap:22px 12px}.saved-tabs{margin:20px 0 23px}.saved-tabs>a{font-size:10px}.saved-taste-grid{gap:4px}.my-taste-summary h2{font-size:25px}.my-actions .outline{font-size:9px;letter-spacing:0}
  .my-page .history-card>.row{font-size:10px}.my-page .empty{padding:25px 0}.complete-page .reservation-ticket{margin:25px 0}.complete-page h1{font-size:29px}
 }
-@media(max-width:760px) and (max-height:700px){.taste-discovery{--card-h:62dvh}.taste-header{height:45px}.taste-scroll{height:calc(100dvh - 128px);padding-block:calc((100dvh - 128px - var(--card-h))/2)}.preview-gallery .carousel{aspect-ratio:2.8}.preview-info{padding:10px 14px}.puzzle-stage{max-height:65dvh}.assembly-caption{font-size:11px}}
+@media(min-width:0px) and (max-height:700px){.taste-discovery{--card-h:62dvh}.taste-header{height:45px}.taste-scroll{height:calc(100dvh - 128px);padding-block:calc((100dvh - 128px - var(--card-h))/2)}.preview-gallery .carousel{aspect-ratio:2.8}.preview-info{padding:10px 14px}.puzzle-stage{max-height:65dvh}.assembly-caption{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.assembling .puzzle-piece{animation-duration:.01s;animation-delay:.8s}.start-mark{animation-duration:.01s}.taste-slide,.piece-zoom,.taste-result,.puzzle-sequence{transition:none}}
 
 .carousel-control,.carousel-control button{height:44px}
@@ -207,7 +207,7 @@ body{background:var(--paper);color:var(--ink)}
 .map-modes button,.search,.filter{background:#23291feF;border-color:#424a38}
 .map-pin>span:last-child{background:#23291f;border-color:#414b35}
 .primary{background:#e8ebdc;color:#1a2015;border-color:#e8ebdc}
-@media(max-width:760px){.explore-grid,.saved-grid{grid-template-columns:1fr;gap:26px}.explore-shop>a>img{aspect-ratio:4/3}.explore-shop h2,.saved-grid h2{font-size:20px}.explore-shop p{font-size:11px}.explore-shop .taste-match{font-size:9px}.explore-shop .icon-button{min-width:44px}}
+@media(min-width:0px){.explore-grid,.saved-grid{grid-template-columns:1fr;gap:26px}.explore-shop>a>img{aspect-ratio:4/3}.explore-shop h2,.saved-grid h2{font-size:20px}.explore-shop p{font-size:11px}.explore-shop .taste-match{font-size:9px}.explore-shop .icon-button{min-width:44px}}
 /* Screenshot feedback — 2026-09-28 */
 .map-scene{position:absolute;inset:0;transform-origin:0 0;will-change:transform}
 .map-canvas{overflow:hidden;touch-action:none}

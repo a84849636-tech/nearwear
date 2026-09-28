@@ -1,0 +1,27 @@
+/* Screenshot refinements: retain the MVP's existing mobile styling and behavior. */
+@font-face{font-family:Pretendard;src:url('/public/fonts/PretendardVariable.woff2') format('woff2');font-style:normal;font-weight:45 920;font-display:swap}
+:root,body,body *{font-family:Pretendard,sans-serif}
+#app{width:100%;max-width:430px;margin-inline:auto;position:relative}
+.app-shell,.main,.main.wide{width:100%;max-width:430px}
+.bottom-nav{width:min(100%,430px);left:50%;right:auto;transform:translateX(-50%)}
+#toast{max-width:min(90vw,390px)}
+.story-frame{max-width:430px}
+.start-mark{animation-duration:.2s}
+.start-mark .wordmark{font-size:calc(clamp(26px,7vw,30.1px) + 10px)}
+@media(prefers-reduced-motion:reduce){.start-mark{animation-duration:.01s}}
+.puzzle-stage{width:min(88vw,378.4px)}
+.puzzle-sequence .puzzle-stage{width:min(88vw,378.4px)}
+.shop-identity>.icon-button{align-self:flex-start;margin-top:-8px;width:44px;height:44px;flex-shrink:0}
+.stories{justify-content:flex-start;gap:calc((100% - 204px)/6)}
+.stories a{flex:0 0 51px;min-width:51px}
+.detail-copy h1{margin:10px 0 16px}
+.detail-copy .price-row{margin:16px 0 26px}
+#reservation-form input[type=date],#reservation-form select{width:100%;min-width:0;font-variant-numeric:tabular-nums;text-align:left;text-indent:0;padding:0 14px}
+#reservation-form input[type=date]{position:relative;padding-right:38px}
+#reservation-form input[type=date]::-webkit-calendar-picker-indicator{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0;padding:0;width:16px;height:16px;cursor:pointer}
+#reservation-form select{padding-right:10px}
+#reservation-form option{font:inherit;font-variant-numeric:tabular-nums;text-align:left;text-indent:0;padding:8px 14px;min-height:36px;line-height:20px}
+.reservation-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;align-items:stretch}
+.reservation-actions>.text-link,.reservation-actions>.outline{display:flex;align-items:center;justify-content:center;min-height:48px;width:100%;margin:0;padding:12px 4px;font-size:12px;letter-spacing:0}
+.map-workspace>.map-modes{bottom:41px}
+.map-workspace:not(:has(.preview-card)) .map-zoom-controls{bottom:122px}
