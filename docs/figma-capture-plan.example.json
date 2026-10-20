@@ -1,0 +1,24 @@
+{
+  "description": "Example source filenames. Confirm the actual PNG files and each photo rectangle before running. Coordinates refer to the supplied 430px frames.",
+  "frames": [
+    {
+      "source": "04-archive.png",
+      "referenceWidth": 430,
+      "excludeUI": [[0, 0, 430, 162], [0, 706, 430, 226]],
+      "captures": [
+        {"key": "result/1/01", "rect": [24, 162, 185, 266]},
+        {"key": "result/1/02", "rect": [221, 162, 185, 266]},
+        {"key": "result/1/03", "rect": [24, 440, 185, 266]},
+        {"key": "result/1/04", "rect": [221, 440, 185, 266]}
+      ]
+    },
+    {
+      "source": "17-ototo.png",
+      "referenceWidth": 430,
+      "excludeUI": [[0, 0, 430, 53], [0, 331, 430, 601]],
+      "captures": [
+        {"key": "product-hero/ototo-01/01", "rect": [24, 53, 382, 278]}
+      ]
+    }
+  ]
+}
