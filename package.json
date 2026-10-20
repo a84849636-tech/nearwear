@@ -1,1 +1,16 @@
-{"name":"nearwear-mvp","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node scripts/serve.mjs","build":"node scripts/build.mjs","preview":"node scripts/serve.mjs dist"},"engines":{"node":">=20"}}
+{
+  "name": "nearwear-mvp",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "test": "node --test tests/*.test.mjs",
+    "assets:check": "node scripts/check-assets.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
