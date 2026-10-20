@@ -83,7 +83,7 @@ node scripts/standalone-preview.mjs
 ```
 
 - `npm test`: 10개 테스트 통과.
-- `python tests/browser_smoke.py`: 실행 결과는 `/workspace/nearwear-artifacts/browser-results.json`. 통과 수와 PNG 스크린샷은 해당 실행 산출물을 확인.
+- `python tests/browser_smoke.py`: 실행 결과는 `/workspace/nearwear-artifacts/browser-results.json`. 16개 시나리오 통과, 브라우저 예외 0개. PNG 스크린샷은 해당 실행 산출물을 확인.
 - 430×932 스크린샷을 원본의 보이는 구조·간격과 수동 대조. 상품 헤더 사진 높이278, 좌우24, 흰 카드 시작y331 등 맞춤. 로그인 세로 간격 보정. **원본 이미지 파일이 없어 전체 픽셀 차이 비교는 수행 불가.**
 - 320·375·430·1440px 가로 넘침 검사. 430px에서 상품 사진 x=24, 너비382 검사.
 - `npm run assets:check`: 현재 누락 상태를 이유로 종료 코드1이 정상. 이것은 성공 검사가 아니라 이미지 미완료 상태를 드러내는 점검.
@@ -105,3 +105,13 @@ node scripts/standalone-preview.mjs
 현재 로컬 서버는 `HOST=0.0.0.0 npm run dev`로 4173 포트에서 실행. 별도 다운로드용 HTML은 `/workspace/nearwear-artifacts/NEARWEAR-preview.html`. 관리형 환경의 file:// 정책 차단 때문에 사용자 PC에서 직접 열기는 별도로 검증되지 않았고, 같은 HTML은 HTTP 서버에서 초기 진입·시연 로그인까지 검증함.
 
 Vercel 인증·프로젝트 바인딩은 현재 환경에서 발견되지 않음. 토큰 부재만으로 GitHub 인증 문제라고 판단하지 않음. 운영 사이트·프로덕션 배포 명령은 실행하지 않음. Vercel이 연결된 환경에서 이 브랜치를 Preview로 배포할 때는 `vercel deploy`를 사용하고 `--prod`를 사용하지 않음. 운영 환경 업데이트와 Preview 배포를 구분해야 함.
+
+## GitHub Preview 연결 확인
+
+기능 변경 커밋 `83a404dcbe7ea953c9654c2369ef08d0ab19ffa6`을 작업 브랜치에 푸시했습니다. main에 병합하거나 운영 배포 명령을 실행하지 않았습니다.
+
+GitHub의 해당 커밋 Checks 화면에서 Vercel Preview Comments 성공과 아래 실제 생성된 브랜치 미리보기 링크를 확인했습니다:
+
+https://nearwear-git-feat-nearwear-advanced-figma-hb-9c17.vercel.app/
+
+이 클라우드 실행 환경에서 미리보기 도메인을 요청하면 네트워크 프록시 CONNECT 403으로 차단됩니다. 따라서 위 원격 사이트의 HTTP 응답·브라우저 동작은 직접 검증하지 못했습니다. Preview Comments 성공은 앱 배포 성공의 증명이 아니며, **테스트 통과는 로컬 개발/빌드 서버에 대한 결과**입니다. 링크는 추측한 주소가 아니라 GitHub가 제공한 링크입니다.
