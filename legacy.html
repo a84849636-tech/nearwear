@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEARWEAR — 12-screen MVP</title><meta name="description" content="취향으로 발견하고, 가까이에서 만나는 빈티지. NEARWEAR 12화면 인터랙티브 프로토타입."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23cbff49'/%3E%3Ctext x='4' y='25' font-family='Arial' font-weight='900' font-size='25'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="studio-head"><div><div class="studio-brand">NEARWEAR<span>®</span></div><div class="studio-meta">MVP / 12 SCREENS / VOL. 01</div></div><div class="view-toggle" aria-label="보기 방식"><button id="boardMode" class="active" onclick="setMode('board')">12화면 보드</button><button id="playMode" onclick="setMode('play')">직접 사용하기 ↗</button></div></header>
+<section class="studio-intro"><div><small>DISCOVER YOUR NEXT FIND.</small><h1 class="cond">YOUR TASTE.<br>YOUR NEIGHBORHOOD.</h1></div><p>취향을 찾고, 매장을 발견하고, 한 벌을 만나기까지.<br>NEARWEAR의 열두 장면.<br><span class="tiny">각 화면의 버튼을 누르면 체험 모드로 연결됩니다.</span></p></section>
+<main><div id="board" class="board"></div><div class="play-layout"><nav id="index" class="page-index" aria-label="12개 화면 바로가기"></nav><div id="player"></div><aside id="notes" class="play-notes"></aside></div></main>
+<footer class="studio-footer"><span>NEARWEAR — FIND WHAT FITS, WHERE YOU ARE.</span><span>검토용 프로토타입 · 가상 매장 / 데모 예약 / 예시 지도</span></footer>
+<dialog id="modal"><button class="close" onclick="document.getElementById('modal').close()" aria-label="닫기">×</button><div id="modalContent"></div></dialog><div id="toast" role="status" aria-live="polite"></div>
+<script src="data.js"></script><script src="app.js"></script><link rel="stylesheet" href="stories.css"><script src="stories.js"></script></body></html>

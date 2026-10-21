@@ -1,1 +1,15 @@
-{"name":"nearwear-mvp","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node scripts/serve.mjs","build":"node scripts/build.mjs","preview":"node scripts/serve.mjs dist"},"engines":{"node":">=20"}}
+{
+  "name": "nearwear-mvp",
+  "version": "0.2.0",
+  "private": true,
+  "description": "NEARWEAR Figma 고도화 01–24 screens and original NEW stories",
+  "scripts": {
+    "start": "node server.cjs",
+    "check": "node --check data.js && node --check app.js && node --check stories.js && node --check figma-app.js && node --check server.cjs",
+    "test": "node test.cjs && node test-figma.cjs",
+    "build": "node build.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

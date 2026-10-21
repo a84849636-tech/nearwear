@@ -1,0 +1,8 @@
+.git/
+site-build/
+dist/
+*.md
+preview-*.png
+profile-*.png
+*-mobile.png
+verification-*.json

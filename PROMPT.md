@@ -1,383 +1,432 @@
-# NEARWEAR IMPLEMENTATION PROMPT
+# NEARWEAR --- Implementation Prompt
 
-Version 2.1
+## Role
 
-## 필수 제작 기준
+You are working inside the existing NEARWEAR codebase.
 
-- 제작버전: 모바일웹 430px 이하 버전
-- 제작 언어: HTML, CSS, JavaScript
-- 모든 세션은 구현 시작 전에 반드시 PRD.md를 읽고 숙지할 것.
-- 360px / 390px / 430px를 우선 확인하며, 더 넓은 화면은 보조 반응형 범위로 취급한다.
+Do not rebuild the project from scratch unless technically necessary.
 
-## Goal
+First inspect the current project structure, routes, components, styles,
+assets, and existing implementation. Reuse working components and
+preserve existing functionality where it still matches the updated
+requirements.
 
-현재 구현된 NEARWEAR 프로젝트를 최신 PRD와 MVP 12 Screens 기준으로
-수정한다.
+`PRD.md` is the product source of truth. This file defines
+implementation priorities and constraints.
 
-새 프로젝트를 만들지 않는다. 현재 프로젝트의 기존 구조와 정상 작동하는
-기능을 최대한 유지한다.
+------------------------------------------------------------------------
 
-이번 작업은 기능 전체 재구축이 아니라 UI/UX와 visual presentation을 최신
-확정안으로 수정하는 작업이다.
+## Objective
 
-## Source of Truth
+Update the existing NEARWEAR MVP to match the revised product direction:
 
-작업 기준 우선순위:
+**Map-based vintage store discovery + social-style store profiles +
+product stock checking + reservation + offline visit**
 
-1.  최신 PRD v2.1
-2.  최신 MVP 12 Screens Revised
-3.  기존 Current MVP 12 Screens
-4.  첨부된 화면별 수정 캡처 / visual reference
-5.  이 PROMPT
+Core journey:
 
-레퍼런스는 그대로 복제하지 않고 composition, typography hierarchy, image
-treatment, spacing, interaction principle, editorial mood만 참고한다.
+**DISCOVER → EXPLORE → FIND → CHECK → RESERVE → VISIT**
 
-## Preserve Existing Implementation
+Map → Store Preview → Store Profile → Feed → Items in Photo → Product
+Detail / Stock → Reservation → Visit
 
-특별한 이유가 없다면 다음을 유지한다:
+------------------------------------------------------------------------
 
--   Existing URL hash routing
--   Shop / Product data relationships
--   Browser Storage
--   Taste data / matching logic
--   Explore Preference
--   모든 주변 매장을 표시하는 MAP
--   Taste matching store emphasis
--   Search / Filter
--   SHOP PREVIEW carousel
--   SHOP DETAIL tabs / stories / product linkage
--   Store Save
--   Item Save
--   Add to Taste
--   Reservation
--   Reservation Cancel
--   Re-reservation
--   VIEW MAP
--   EXPLORE
--   SAVED
--   MY
--   Bottom Navigation
--   Back navigation
--   Scroll restoration
--   Toast / feedback
+## Before Coding
 
-## 01 START
+1.  Read the full `PRD.md`.
+2.  Inspect the existing codebase.
+3.  Identify existing screens/components that can be reused.
+4.  Keep correctly implemented functionality.
+5.  Modify only what is necessary to match the new PRD.
+6.  Do not add features outside the MVP scope.
+7.  Use fictional/demo data where backend or live data is not required.
+8.  Keep the application runnable throughout the implementation.
 
-기존 Red Editorial / LOOK THROUGH START를 제거한다.
+------------------------------------------------------------------------
 
-Required: - BLACK full screen - centered NEARWEAR mark only - 적당한
-mark size - no explanatory copy - no CTA - no arrow - no photography -
-no LOOK THROUGH - no hover/click requirement
+# Required 12-Screen MVP
 
-Flow:
+Implement or update these 12 primary screens:
 
-BLACK → NEARWEAR mark → 약 10초 → TASTE DISCOVERY
+1.  Splash
+2.  Style Preference
+3.  Map / Discover
+4.  Store Preview
+5.  Store Profile / Feed
+6.  Store Story
+7.  Feed Post Detail
+8.  Items in Photo
+9.  Store Items
+10. Product Detail / Stock
+11. Reservation
+12. Reservation Complete
 
-약 10초 후 기존 URL hash routing 방식으로 자동 이동한다.
+All important navigation paths must work.
 
-Subtle fade는 가능하지만 별도의 onboarding interaction을 추가하지
-않는다.
+------------------------------------------------------------------------
 
-Bottom Navigation은 숨긴다.
+# Screen Requirements
 
-## 02 TASTE DISCOVERY
+## 01 --- Splash
 
-기존 Taste calculation logic과 LIKE / SKIP semantics를 유지한다.
+Create a minimal NEARWEAR opening screen.
 
-Explore Preference: - WOMENSWEAR - MENSWEAR - ALL - Default ALL
+Display: - NEARWEAR - `Vintage around you.`
 
-기존 Card Stack 방식은 사용하지 않는다.
+Keep the screen simple and brand-focused.
 
-Vertical image browsing + scroll snap을 구현한다.
+------------------------------------------------------------------------
 
--   previous image / current image / next image 구조가 느껴져야 한다.
--   current image는 화면 중앙에서 가장 크고 선명하다.
--   previous / next image는 일부만 노출하거나 scale / opacity 차이를
-    둔다.
--   current image가 center에 도달했을 때 충분히 크게 보여야 한다.
--   일반적인 긴 이미지 목록처럼 보이지 않게 한다.
+## 02 --- Style Preference
 
-Background: BLACK
+Allow multiple style selections.
 
-상단 copy는 TASTE DISCOVERY 정도만 최소 표시한다.
+Demo categories: - Archive - Y2K - Minimal - Street - Workwear -
+Classic - Japanese - Designer
 
-Current image 아래: SKIP LIKE
+Include a Continue button.
 
-큰 button box나 heart icon은 필수가 아니다. Typography action처럼 표현할
-수 있으나 mobile touch target은 충분히 확보한다.
+No production recommendation engine is required.
 
-LIKE: - current image taste weight 증가
+------------------------------------------------------------------------
 
-SKIP: - strong dislike로 처리하지 않음
+## 03 --- Map / Discover
 
-LIKE / SKIP 후 다음 이미지로 자연스럽게 이동한다.
+This is the primary discovery screen.
 
-Progress: 01 / 12
+Include: - Map - Current location indicator - Store pins - Search -
+STYLE filter - OPEN filter - Distance filter - Bottom navigation:
+`MAP / SAVED / MY`
 
-Visual hierarchy: 1. IMAGE 2. LIKE / SKIP 3. Progress / Title
+Selecting a store pin must open the Store Preview instead of navigating
+directly to the full store page.
 
-## 03 YOUR TASTE
+------------------------------------------------------------------------
 
-기존 Taste result calculation을 유지한다.
+## 04 --- Store Preview
 
-2 columns × 3 rows, 총 6개의 puzzle pieces를 사용한다.
+IMPORTANT: preserve the existing preview-card structure where possible.
 
-단순 image grid가 아니라 실제 puzzle tab / slot silhouette가 있어야
-한다.
+Replace clothing/product preview photography with exactly three
+store-related demo images:
 
-Aesthetic: - BLACK background - fashion photography - editorial
-collage - not colorful/playful/childish
+1.  Store interior
+2.  Display rack
+3.  Store exterior
 
-가능한 한 실제 LIKE 이미지 6장을 사용한다. LIKE 이미지가 6개보다 적을
-때만 taste metadata 기준으로 보완한다.
+### Carousel Behavior
 
-First-entry sequence:
+-   Horizontal swipe
+-   `1/3`, `2/3`, `3/3` position indicator
+-   Only the image area moves
+-   Store information below remains fixed
+-   Images must never be stretched or distorted
+-   Preserve original aspect ratio
+-   Natural cropping inside the image container is acceptable
 
-BLACK → Putting your taste together... → 6 puzzle pieces appear around
-screen → pieces move from different positions → pieces lock one by one →
-final piece locks → completed 2×3 puzzle → short viewing moment → puzzle
-shrink / fade → YOUR TASTE RESULT
+### Fixed Information
 
-Completed puzzle interaction:
+Show: - Store name - Style tags - Distance - Opening status - Closing
+time - Save action - `VIEW SHOP →`
 
-Tap piece: - selected piece scale 1.15--1.25 - other pieces dim
+`VIEW SHOP →` opens the Store Profile.
 
-Outside tap: - original state
+The card must fit correctly on mobile without clipping, overflow, or
+overlapping controls.
 
-VIEW MY PUZZLE에서도 동일한 completed puzzle을 다시 볼 수 있게 한다.
+------------------------------------------------------------------------
 
-## 04 MAP / HOME
+## 05 --- Store Profile / Feed
 
-현재 Dark Map 구조를 크게 수정하지 않는다.
+This is one of the most important screens.
 
-Keep: - Current Area - Search - Filter - Current Location - FOR YOUR
-TASTE - ALL SHOPS - SAVED - Pins - Bottom Navigation
+The experience should resemble browsing a fashion store's social profile
+rather than a generic e-commerce or map listing.
 
-Taste matching은 filtering이 아니라 recommendation emphasis다.
+### Header
 
-Non-matching shops를 숨기지 않는다.
+Show: - Profile image - Store name - Style tags - Distance - Opening
+status - Directions - Save
 
-기존 MAP 하단 NEAR YOU list는 제거한다.
+### Stories
 
-MAP = location discovery EXPLORE = photo/content discovery
+Show: - NEW - TODAY - SALE - INFO
 
-## 05 SHOP PREVIEW
+### Tabs
 
-현재 구현은 최대한 유지한다.
+Use: `FEED / ITEMS / INFO`
 
-Keep: - 3 image carousel - counter - Shop Name - Distance - Open
-Status - Style Tags - Taste Match - Store Save - VIEW SHOP
+FEED is the default.
 
-Modify: - unnecessary left/right image margin 최소화 - image width를
-preview card에 자연스럽게 맞춤 - aspect ratio 유지 - object-fit / crop
-조정 - photography를 충분히 크게 표시 - Mobile preview가 MAP을 과도하게
-가리지 않게
+### Feed
 
-## 06 SHOP DETAIL / PROFILE
+Use a large 2-column image grid.
 
-Preserve: - Hero carousel - Store Profile - Taste Match - NEW / TODAY /
-SALE / INFO - FEED / ITEMS / INFO - Feed interaction - Product linkage -
-Add to Taste
+Mix: - Outfit shots - Styling - Product photography - Store interior -
+Display racks - Store atmosphere
 
-Hero/store image의 불필요한 horizontal margin을 제거하고 image width를
-적극 사용한다.
+Selecting a post opens Feed Post Detail.
 
-FEED: - Instagram / vintage shop inventory feed feeling - Mobile: 3
-columns - Wider screen: up to 4 columns - very small grid gap
+Do not add a large hero image above the feed. The feed should appear
+relatively quickly after the profile/story area.
 
-Photography mix: - vintage items - outfits - accessories - shoes -
-bags - styling - store details / interior
+------------------------------------------------------------------------
 
-작은 grid 위에 과도한 heart/button/text를 올리지 않는다. 필요한 action은
-tap 후 expanded/detail state에서 보여줄 수 있다.
+## 06 --- Store Story
 
-## 07 ITEM DETAIL
+Create a story-style full-screen viewer.
 
-Keep: - Multiple Images - Price - Availability - SAVE ITEM - RESERVE
+Use demo content for: - Today's opening information - New arrivals -
+Sale/event - Store notices
 
-Required info: - SIZE - MEASUREMENTS - CONDITION - FLAWS
+Show: - Store name - Posted time such as `2h` - Story image - Short
+message - Optional `VIEW ITEMS`
 
-Availability: - AVAILABLE - RESERVED - SOLD
+Only story viewing is required.
 
-RESERVE는 AVAILABLE일 때만 활성화한다.
+DO NOT build owner upload/edit functionality.
 
-## 08 RESERVATION
+------------------------------------------------------------------------
 
-기존 reservation validation / date / time logic을 유지한다.
+## 07 --- Feed Post Detail
 
-User-facing: - Selected Item - Store - Price - SELECT A DATE - SELECT A
-TIME - 예약 상품은 선택한 방문 시간까지 매장에서 보관됩니다. - RESERVE
-ITEM →
+Show: - Large image - Store name - Caption - Tags - Save/Like action -
+`사진 속 상품 보기`
 
-Remove: - frontend demo - browser storage explanation - fake inventory -
-prototype explanation
+The key CTA is `사진 속 상품 보기`.
 
-## 09 RESERVATION COMPLETE
+Selecting it opens Items in Photo.
 
-Keep: - RESERVED - Item - Store - Date - Time - Location - VIEW MAP -
-VIEW RESERVATION - CANCEL RESERVATION
+------------------------------------------------------------------------
 
-VIEW MAP: - reserved shop selected
+## 08 --- Items in Photo
 
-Cancel: - item returns to AVAILABLE when appropriate - Re-reservation
-must continue to work
+Connect a selected feed photo to actual demo inventory.
 
-Remove development/demo copy.
+Each connected product shows: - Thumbnail - Product name - Price - Stock
+status
 
-## 10 EXPLORE
+Support: - `IN STOCK` - `SOLD`
 
-Keep: - FOR YOUR TASTE - NEAR YOU - NEW IN - TRY SOMETHING DIFFERENT
+Available product → Product Detail.
 
-동일 매장/이미지 반복을 줄인다.
+SOLD product → no reservation.
 
-여러 mock vintage shop과 서로 다른 photography를 사용한다.
+This interaction is a core differentiator of NEARWEAR and should be
+visually clear.
 
-TRY SOMETHING DIFFERENT는 current Taste Profile과 조금 다른 매장을
-보여준다.
+------------------------------------------------------------------------
 
-Personalization 때문에 discovery를 제한하지 않는다.
+## 09 --- Store Items
 
-## 11 SAVED
+This screen represents the ITEMS tab inside the Store Profile.
 
-Keep: - SHOPS - ITEMS - TASTE
+Show: `FEED / ITEMS / INFO`
 
-State mapping: - Store Save → SHOPS - Item Save → ITEMS - Add to Taste →
-TASTE
+ITEMS is active.
 
-세 state는 독립적으로 관리한다.
+Include category filters: - ALL - OUTER - TOP - BOTTOM
 
-## 12 MY / MY TASTE
+Product cards: - Image - Product name - Price - Stock state
 
-Keep: - Taste Profile - YOU SEEM TO LIKE - Explore Preference - REFINE
-MY TASTE - VIEW MY PUZZLE - Reservations - Location - Notifications
+Clearly mark SOLD products.
 
-REFINE MY TASTE: - go to Taste Discovery
+Product selection → Product Detail.
 
-VIEW MY PUZZLE: - show completed 6-piece puzzle
+------------------------------------------------------------------------
 
-Do not duplicate SAVED content inside MY.
+## 10 --- Product Detail / Stock
 
-## Global Visual Direction
+Show: - Product images - Product name - Price - Size - Condition -
+Description - Store - Current stock state - RESERVE CTA
 
-START: Minimal / Brand Splash
+Rules: - IN STOCK → reservation enabled - SOLD → reservation disabled
 
-TASTE DISCOVERY: Image-focused / Immersive
+The stock state must be easy to understand.
 
-YOUR TASTE: Interactive / Editorial Puzzle
+------------------------------------------------------------------------
 
-MAP onward: Functional / Dark / Photography-led
+## 11 --- Reservation
 
-SHOP DETAIL: Vintage Shop / Instagram-like visual feed
+Show: - Selected product - Price - Store - Visit date - Visit time -
+Reservation notice - RESERVE button
 
-Do not repeat the same box/card UI across every screen.
+For this MVP, a demo/local reservation flow is sufficient.
 
-Use photography, typography, spacing and restrained accents to connect
-the visual system.
+No payment flow.
 
-## Copy Cleanup
+RESERVE → Reservation Complete.
 
-Remove from user-facing UI: - DEMO labels - Prototype explanation -
-Browser Storage explanation - Frontend explanation - Fake inventory /
-fake location explanation - repetitive instructions - excessive
-editorial filler - unnatural AI-style copy
+------------------------------------------------------------------------
 
-Keep copy short, clear and visually unobtrusive.
+## 12 --- Reservation Complete
 
-## Mobile Priority
+Show: - RESERVED state - Product - Store - Visit date/time -
+Directions - Reservation history link/action
 
-Check first at: - 360px - 390px
+This screen should clearly communicate that the digital journey now
+continues as a physical store visit.
 
-Especially verify: - TASTE vertical browsing / scroll snap - YOUR TASTE
-puzzle - SHOP PREVIEW image width - SHOP DETAIL hero - SHOP DETAIL
-3-column feed - Bottom Navigation - Tap targets
+------------------------------------------------------------------------
 
-Also verify Desktop.
+# Demo Content
 
-## State Requirements
+Use fictional/demo content.
 
-Maintain: - Explore Preference - Liked Taste Images - Taste Metadata -
-Selected Store - Saved Stores - Selected Item - Saved Items - Taste Feed
-Images - Map Filters - Reservation - Item Availability
+Primary demo store:
 
-Reservation lifecycle:
+**AFTERDARK**
 
-AVAILABLE → RESERVED → CANCEL → AVAILABLE
+Style: `Archive / Street / Vintage`
 
-Re-reservation must work.
+Provide: - 3 Store Preview images: interior / display rack / exterior -
+Minimum 6 Feed posts - NEW / TODAY / SALE / INFO story examples -
+Minimum 6 products - Mix of IN STOCK and SOLD products
 
-## Technical Constraints
+Do not depend on production APIs for the prototype unless an existing
+working integration is already required by the project.
 
--   Do not create a new project.
--   Do not change framework unnecessarily.
--   Keep hash routing unless a clear technical reason requires
-    otherwise.
--   Backend is not required for MVP.
--   Mock data and Browser Storage are acceptable.
--   Do not expose internal taste matching scores.
--   Do not add shipping / checkout / payment flows.
--   Core outcome remains: Online Discovery → Reservation → Offline
-    Visit.
+------------------------------------------------------------------------
 
-## Final Validation
+# Visual Direction
 
-Test:
+The UI should feel like a curated vintage/fashion editorial product.
 
-1.  START → mark only → 약 10초 → TASTE DISCOVERY automatic navigation
-2.  TASTE vertical scroll/snap
-3.  LIKE
-4.  SKIP
-5.  Taste result
-6.  Puzzle assembly
-7.  Puzzle tap interaction
-8.  모든 주변 매장 유지
-9.  Search / Filter
-10. Store Save
-11. Item Save
-12. Add to Taste
-13. Taste Profile update
-14. SHOP PREVIEW carousel
-15. SHOP DETAIL tabs / stories / product linkage
-16. Reservation
-17. Cancel
-18. Re-reservation
-19. VIEW MAP selection
-20. MAP / EXPLORE / SAVED / MY
-21. Back navigation
-22. Scroll restoration
-23. Browser Storage persistence
-24. 360px
-25. 390px
-26. Desktop
+Use: - Editorial composition - Minimal interface - Contemporary
+typography - Toned-down palette - Slightly dark atmosphere - Image-first
+hierarchy - Generous spacing where appropriate
 
-## Completion Report
+Photography should be the strongest visual element.
 
-완료 후 다음 순서로 보고한다:
+Avoid: - Neon-heavy styling - Excessive lime green - Generic
+marketplace/e-commerce appearance - Excessively rounded playful cards -
+Oversized UI elements that compete with photos - Unnecessary
+gradients/effects - Adding visual elements solely to fill empty space
 
-1.  수정한 파일
-2.  화면별 수정 내용
-3.  기존에서 유지한 기능
-4.  삭제한 UI / copy
-5.  새로 구현한 interaction
-6.  TASTE vertical browsing 작동 방식
-7.  Puzzle assembly 작동 방식
-8.  SHOP DETAIL feed responsive columns
-9.  모바일 검증 결과
-10. 테스트 결과
-11. 아직 placeholder / mock인 부분
-12. 남은 문제
+Do not blindly copy Instagram. Use its profile/feed browsing behavior as
+a structural reference while keeping NEARWEAR visually distinct.
 
-아직 Vercel에는 배포하지 않는다.
+------------------------------------------------------------------------
 
-먼저 기존 프로젝트의 로컬 구현과 테스트까지만 완료하고, 수정된 화면 확인
-후 배포한다.
+# Mobile / Responsive Requirements
 
-## 통합 구현 기준 (2026-09-27)
+Mobile is the primary target.
 
-학원 `NEARWEAR_Current_MVP_12_Screens(2).docx`의 12화면 구성과 탐색·저장·예약 흐름을 기반으로 한다. 최신 사용자 요청 및 PRD v2.1 / Revised MVP에서 변경한 START, 세로 취향 탐색, 퍼즐, 3열 피드가 과거 화면보다 우선한다. 화면별 경로와 수용 기준은 [MVP.md](MVP.md)에서 관리한다.
+Ensure: - No horizontal page overflow - No clipped preview cards - No
+overlapping text/buttons - Touch-friendly controls - Horizontal swipe
+for Store Preview - Images preserve aspect ratio - Clean two-column
+Feed - Bottom navigation remains usable - Screens remain visually
+coherent at common mobile widths
 
-- 기존 프로젝트와 저장 데이터, ID, hash 경로를 유지한다.
-- 이번 수정에서는 이미지를 생성하거나 새 사진을 다운로드하지 않는다. 현재 로컬 자산만 재사용한다.
-- 기능 화면은 학원 자료의 올리브 블랙 톤과 큰 매장 사진을 반영한다.
-- 학원 화면의 DEMO 설명, 예전 START CTA, Card Stack, MAP 하단 목록은 최신 요청에 따라 복구하지 않는다.
-- 로컬 테스트까지만 진행하며 배포하지 않는다.
+------------------------------------------------------------------------
+
+# Required Navigation
+
+The following path must work:
+
+Splash → Style Preference → Map → Store Pin → Store Preview → VIEW SHOP
+→ Store Profile → Feed Post → Items in Photo → Product Detail →
+Reservation → Reservation Complete
+
+Also support:
+
+Store Profile → Story
+
+and:
+
+Store Profile → ITEMS → Product Detail → Reservation
+
+------------------------------------------------------------------------
+
+# MVP Scope Restrictions
+
+Do NOT implement:
+
+-   Store owner/admin dashboard
+-   Store owner accounts
+-   Feed upload
+-   Story upload
+-   Real inventory management
+-   POS integration
+-   Payment
+-   Delivery
+-   Chat/DM
+-   Comments
+-   Reviews
+-   Social following
+-   Full recommendation algorithm
+-   Complex production authentication
+-   Production reservation management
+
+Do not expand the project beyond the PRD.
+
+------------------------------------------------------------------------
+
+# Implementation Principles
+
+-   Reuse existing code where appropriate.
+-   Prefer reusable components over duplicated markup.
+-   Keep demo data structured and easy to replace later.
+-   Maintain clear separation between data, UI components, and
+    navigation.
+-   Avoid unnecessary dependencies.
+-   Do not break existing project setup or deployment configuration.
+-   Do not replace working architecture solely for stylistic reasons.
+-   Preserve accessibility basics such as meaningful buttons, labels,
+    and usable touch targets.
+
+------------------------------------------------------------------------
+
+# Reference Images
+
+If reference screenshots/images are provided with this task:
+
+-   Use them only as visual/layout references.
+-   Do not reproduce them pixel-for-pixel.
+-   Do not place the reference screenshots themselves inside the app.
+-   Use separate demo imagery appropriate for a vintage/fashion store.
+-   Reference images 1--3 primarily inform Store Profile / Feed behavior
+    and mood.
+-   Reference images 4--5 primarily inform Story presentation.
+
+------------------------------------------------------------------------
+
+# Completion Checklist
+
+Before finishing, verify:
+
+-   [ ] All 12 MVP screens exist or are represented by the required
+    states/views.
+-   [ ] Store pins open Store Preview.
+-   [ ] Store Preview has interior/display/exterior carousel.
+-   [ ] Carousel indicator updates from 1/3 to 3/3.
+-   [ ] Preview images are not distorted.
+-   [ ] Store Preview information stays fixed while images change.
+-   [ ] VIEW SHOP opens Store Profile.
+-   [ ] Store Profile defaults to FEED.
+-   [ ] Store Profile has Story, FEED, ITEMS, INFO structure.
+-   [ ] Feed uses a 2-column grid.
+-   [ ] Feed post opens detail view.
+-   [ ] `사진 속 상품 보기` works.
+-   [ ] Items in Photo show stock states.
+-   [ ] ITEMS tab works.
+-   [ ] Product Detail shows current stock.
+-   [ ] SOLD products cannot be reserved.
+-   [ ] Reservation flow reaches completion.
+-   [ ] Mobile layout has no obvious clipping/overflow.
+-   [ ] No out-of-scope social/admin/payment features were added.
+
+------------------------------------------------------------------------
+
+# Final Response After Implementation
+
+After completing the work:
+
+1.  Summarize what was changed.
+2.  List important files created or modified.
+3.  Mention any assumptions or demo-only behavior.
+4.  Report any remaining issue that prevents the required flow from
+    working.
+5.  Do not claim a feature works unless it was actually implemented or
+    verified.
