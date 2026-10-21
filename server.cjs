@@ -2,7 +2,7 @@ const http=require('node:http');
 const fs=require('node:fs');
 const path=require('node:path');
 const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.woff2':'font/woff2','.ttf':'font/ttf'};
-const files=new Set(['index.html','legacy.html','styles.css','app.js','data.js','stories.css','stories.js','figma-app.css','figma-app.js','figma-screens.json']);
+const files=new Set(['index.html','demo.js','demo.css','legacy.html','styles.css','app.js','data.js','stories.css','stories.js','figma-app.css','figma-app.js','figma-screens.json']);
 const port=Number(process.env.PORT||4174);
 http.createServer((req,res)=>{
   let requested;try{requested=decodeURIComponent(req.url.split('?')[0]).replace(/^\//,'')||'index.html'}catch{res.writeHead(400);return res.end('Bad request')}

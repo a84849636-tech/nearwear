@@ -20,9 +20,10 @@
     GOWON:{preview:'494:12129',feed:'494:12097',info:'494:11956',items:'494:11908',product:'494:11872',instagram:'gowon.shop',map:'https://map.naver.com/p/entry/place/2099801274'}
   };
   const defaults={gender:'WOMENS',choices:{},result:'273:685',savedStores:['OTUVINTAGE','RYOHE','OTOTO'],savedProducts:[],filters:{styles:[],distance:'전체',open:false,recommended:false,saved:false},reservations:[],deliveries:[],store:'RYOHE'};
-  let cached={};try{cached=JSON.parse(localStorage.getItem('nearwear-v3')||'{}')}catch{}
+  const storageKey=new URLSearchParams(location.search).get('demo')==='1'?'nearwear-demo-v1':'nearwear-v3';
+  let cached={};try{cached=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{}
   let state={...defaults,...cached,filters:{...defaults.filters,...cached.filters}},current,last='494:14621',timer,auth=null;
-  const persist=()=>{try{localStorage.setItem('nearwear-v3',JSON.stringify(state))}catch{notice('저장 공간을 사용할 수 없습니다.');}};
+  const persist=()=>{try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{notice('저장 공간을 사용할 수 없습니다.');}};
   const norm=t=>t.replace(/\s+/g,' ').trim();
   const all=(selector)=>[...root.querySelectorAll(selector)];
   const name=(value)=>all('[data-name]').filter(e=>e.dataset.name.includes(value));
@@ -392,10 +393,11 @@
   async function render(){root.onwheel=null;root._mapPins=null;root.onpointerdown=null;root.onpointerup=null;const match=/^#story\/([a-z]+)\/(\d+)$/.exec(location.hash);if(match){current=screens.filter(s=>s.number===11&&s.store===match[1].toUpperCase()).sort((a,b)=>a.x-b.x)[Number(match[2])-1];originalStory(match);scale();updateReviewNav();return;}
     if(location.hash==='#screens'){root.style.display='none';document.getElementById('review').hidden=false;renderBoard();updateReviewNav();document.title='NEARWEAR — 01~24 전체 화면';return;}
     root.style.display='';document.getElementById('review').hidden=true;const id=location.hash.startsWith('#figma/')?decodeURIComponent(location.hash.slice(7)):location.hash==='#screen-5'?'494:14621':'174:129';current=byId.get(id)||byId.get('174:129');root.style.height=current.height+'px';root.innerHTML=current.html;root.firstElementChild.style.height=current.height+'px';root.classList.remove('stories-screen');wire();styleFilterLayout();storiesLayout();viewportLayout();text('회원맵').forEach(e=>e.remove());text('설정').filter(e=>!e.closest('[role=button]')).forEach(e=>e.remove());scale();updateReviewNav();document.body.classList.toggle('review-mode',reviewMode);scrollTo(0,0);document.title='NEARWEAR — '+current.name;}
-  addEventListener('hashchange',render);addEventListener('resize',scale);addEventListener('storage',e=>{if(e.key==='nearwear-v3'){try{state={...defaults,...JSON.parse(e.newValue||'{}')};render()}catch{}}});
+  addEventListener('hashchange',render);addEventListener('resize',scale);addEventListener('storage',e=>{if(e.key===storageKey){try{state={...defaults,...JSON.parse(e.newValue||'{}')};render()}catch{}}});
   setInterval(()=>{if(root._mapPins?.length)applyPins(root.querySelector('input[type=search]')?.value||'');},60000);
   window.NearwearDesign={screens,go,get state(){return state}};
   await render();
+  dispatchEvent(new Event('nearwear-ready'));
 })().catch(error=>{document.getElementById('notice').textContent=error.message;console.error(error)});
 
 
